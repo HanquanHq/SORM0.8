@@ -208,9 +208,12 @@ public abstract class Query implements Cloneable{
 	 * @param params sql的参数
 	 * @return 查询到的结果
 	 */
-	public Object queryUniqueRow(String sql,Class clazz,Object[] params) {
+	public Object queryUniqueRow(String sql, Class clazz, Object[] params) {
 		List list = queryRows(sql, clazz, params);
-		return (list == null || list.size() > 0) ? null : list.get(0);
+		if (list.size() == 0)
+			return null;
+		else
+			return list.get(0);
 	}
 	
 	/**
